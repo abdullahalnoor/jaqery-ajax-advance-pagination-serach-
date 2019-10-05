@@ -67,7 +67,7 @@
 
                function populateData(data){
                     let output = null;
-                   
+                //    console.log(data);
                    data.data.forEach(function(item){
                        // console.log(item.id);
                        output += `<li class="list-group-item ">
@@ -79,7 +79,7 @@
                            
                            
                            `; 
-                   })
+                  })
                    $("#postList .list-group").empty().append(output);
                    let cDisabled = data.prev_page_url == null ? 'disabled' : false;
                    let lDisabled = data.next_page_url == null ? 'disabled' : false;
@@ -97,17 +97,40 @@
                    $("#postList #pagination").empty().append(pagiantion);
                 }
                 function showEveryPage(data){
+                    let cDisabled = data.prev_page_url == null ? 'disabled' : false;
+                   let lDisabled = data.next_page_url == null ? 'disabled' : false;
+                   
+                    let current_page = ( data.current_page - data.per_page)  > 0 ?  (data.current_page -data.per_page)  : 1 ;
+                    let last = Math.ceil(data.total /data.per_page) ;
+                    let last_page = ((data.current_page +data.per_page)  < last)  ?  (data.current_page +data.per_page ) : last ;
+
+                    let pages ;
+                  
                     
-                    let totalPage = data.total / data.per_page ;
-                    console.log(Math.ceil(totalPage));
-                    let pages = null;
-                    for(i=1 ; i < Math.ceil(totalPage) + 1 ; i++){
+                    if(   current_page > 1   ){
+                        pages +=    `
+                    <li class="page-item ${cDisabled}"><a class="page-link" href="${data.first_page_url}">1</a></li>
+                    <li class="page-item ${cDisabled}"><a class="page-link" href="">...</a></li>
+                        
+                        `;
+                    }    
+                    
+                    for(i=current_page ; i <= last_page  ; i++){
                         var active = data.current_page == i ? 'active' : false;
                          pages += ` 
                             <li class="page-item ${active}"><a class="page-link" href="${data.path}?page=${i}">${i}</a></li>
                             `;
                     }
-                    // return 1;
+
+                    if(last_page < last){
+                        pages +=    `
+                    <li class="page-item ${lDisabled}"><a class="page-link" href="">...</a></li>
+                    <li class="page-item ${lDisabled}"><a class="page-link" href="${data.last_page_url}">${last }</a></li>
+                        
+                        `;
+                    } 
+
+                 
                     return pages;
                    
                 }

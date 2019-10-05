@@ -15,11 +15,11 @@ class PostController extends Controller
     public function index( $search= null){
      
         if($search){
-            $posts =  Post::where('name','LIKE', "%$search%")->orderBy('id','desc')->paginate(3);
+            $posts =  Post::where('name','LIKE', "%$search%")->orderBy('id','desc')->paginate(5);
         }else{
-            $posts =  Post::orderBy('id','desc')->paginate(3);
+            $posts =  Post::orderBy('id','desc')->paginate(5);
         }
-       
+       return   $posts;
         return view('post.index',get_defined_vars());
     }
     public function create(){
