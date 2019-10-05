@@ -88,7 +88,7 @@
                        <ul class="pagination">
                            <li class="page-item ${cDisabled}"><a class="page-link" href="${data.first_page_url}">First</a></li>
                            <li class="page-item ${cDisabled}"><a class="page-link" href="${data.prev_page_url}">Previous</a></li>
-                         ${showPahe(data)}
+                         ${showEveryPage(data)}
                            <li class="page-item ${lDisabled}"><a class="page-link" href="${data.next_page_url}">Next</a></li>
                            <li class="page-item ${lDisabled}"><a class="page-link" href="${data.last_page_url}">Last</a></li>
                        </ul>
@@ -96,7 +96,7 @@
                    `;
                    $("#postList #pagination").empty().append(pagiantion);
                 }
-                function showPahe(data){
+                function showEveryPage(data){
                     
                     let totalPage = data.total / data.per_page ;
                     console.log(Math.ceil(totalPage));
