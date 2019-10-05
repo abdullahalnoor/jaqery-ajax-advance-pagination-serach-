@@ -23,7 +23,7 @@ Route::get('/post/master','PostController@master')->name('post.master');
 Route::get('/posts/{search?}','PostController@index')->name('posts');
 Route::get('/post/create','PostController@create')->name('post.create');
 Route::post('/post/create','PostController@store');
-Route::get('/post/excel','PostController@excel')->name('post.excel');
+Route::get('/post/excel2','PostController@excel')->name('post.excel');
 
 Route::group(function(){
     Route::get('/post/excel1','PostController@excel')->name('post.excel');
