@@ -66,7 +66,7 @@
                 })
 
                function populateData(data){
-                    let output = null;
+                    let output = '';
          
                    data.data.forEach(function(item){
                   
@@ -106,7 +106,7 @@
                     let last_page = ((data.current_page +3)  < last)  ?  (data.current_page +3 ) : last ;
 
                    
-                    let pages ;
+                    let pages = '' ;
                   
                     let start = ( data.current_page - 3)  > 0 ?  (data.current_page -3)  : 1 ;
 
@@ -121,7 +121,9 @@
                     
                     for(i=current_page ; i <= last_page  ; i++){
                         var active = data.current_page == i ? 'active' : false;
-                       
+                    //    if(pages !== undefined){
+                    //        continue;
+                    //    }
                          pages += ` 
                             <li class="page-item ${active}"><a class="page-link" href="${data.path}?page=${i}">${i}</a></li>
                             `;
