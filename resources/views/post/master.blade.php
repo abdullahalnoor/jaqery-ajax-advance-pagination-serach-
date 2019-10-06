@@ -67,9 +67,9 @@
 
                function populateData(data){
                     let output = null;
-                //    console.log(data);
+         
                    data.data.forEach(function(item){
-                       // console.log(item.id);
+                  
                        output += `<li class="list-group-item ">
                                <span class="float-right">
                                    ${item.name}
@@ -100,12 +100,16 @@
                     let cDisabled = data.prev_page_url == null ? 'disabled' : false;
                    let lDisabled = data.next_page_url == null ? 'disabled' : false;
                    
-                    let current_page = ( data.current_page - data.per_page)  > 0 ?  (data.current_page -data.per_page)  : 1 ;
+               
+                    let current_page = ( data.current_page -3 )  > 0 ?  (data.current_page -3)  : 1 ;
                     let last = Math.ceil(data.total /data.per_page) ;
-                    let last_page = ((data.current_page +data.per_page)  < last)  ?  (data.current_page +data.per_page ) : last ;
+                    let last_page = ((data.current_page +3)  < last)  ?  (data.current_page +3 ) : last ;
 
+                   
                     let pages ;
                   
+                    let start = ( data.current_page - 3)  > 0 ?  (data.current_page -3)  : 1 ;
+
                     
                     if(   current_page > 1   ){
                         pages +=    `
@@ -117,6 +121,7 @@
                     
                     for(i=current_page ; i <= last_page  ; i++){
                         var active = data.current_page == i ? 'active' : false;
+                       
                          pages += ` 
                             <li class="page-item ${active}"><a class="page-link" href="${data.path}?page=${i}">${i}</a></li>
                             `;
@@ -130,7 +135,6 @@
                         `;
                     } 
 
-                 
                     return pages;
                    
                 }
@@ -141,8 +145,7 @@
 
                    }else{
                     $.get("{{route('posts')}}",function(data){
-                        console.log(data);
-                    // $("#postList").empty().append(data);
+                       
                     populateData(data);
                    
                     })
